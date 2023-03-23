@@ -1,9 +1,15 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import styles from "./page.module.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import os from "os";
+import Counter from "@/components/Counter";
 
 export default function Home() {
-  return <h1>Homepage</h1>;
+  console.log("123");
+  console.log(os.hostname());
+  return (
+    <h1>
+      Homepage
+      <Counter />
+    </h1>
+  );
 }

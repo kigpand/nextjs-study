@@ -1,3 +1,4 @@
+import { getProduct, getProducts } from "@/service/product";
 import { notFound } from "next/navigation";
 
 type Props = {
@@ -7,16 +8,17 @@ type Props = {
   };
 };
 
-export default function Pants({ params }: Props) {
-  if (params.slug === "nothing") {
-    notFound();
-  }
-  return <div>{params.slug}</div>;
+export default async function Pants({ params: { slug } }: Props) {
+  const product = await getProduct(slug);
+
+  if (!product) notFound();
+
+  return <div>{product && product.name}</div>;
 }
 
-export function generateStaticParams() {
-  const products = ["pants", "skirt"];
+export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((product) => ({
-    slug: product,
+    slug: product.id,
   }));
 }
