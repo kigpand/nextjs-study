@@ -1,6 +1,9 @@
 import { getProduct, getProducts } from "@/service/product";
 import { notFound } from "next/navigation";
 
+// ISR 적용시 업데이트 될 시간(현재 적용은 3초)
+export const revalidate = 3;
+
 type Props = {
   params: {
     // 생성한 키워드 이름
